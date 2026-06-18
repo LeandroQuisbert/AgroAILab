@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroAILab - Micro-Granjas Autónomas</title>
+    <!-- Tailwind CSS para un diseño ultra moderno y rápido -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0b1329',
+                            card: '#1c2541',
+                            accent: '#10b981', /* Verde Esmeralda */
+                            accentHover: '#059669'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-dark text-slate-100 font-sans antialiased">
+
+    <!-- HEADER / NAVBAR -->
+    <header class="border-b border-slate-800 sticky top-0 bg-brand-dark/90 backdrop-blur-md z-50">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="text-xl font-black tracking-wider text-brand-accent">
+                AgroAI<span class="text-white">Lab</span>
+            </div>
+            <!-- Botón WhatsApp Rápido Header -->
+            <a href="https://wa.me/54911XXXXXXXX?text=Hola%20Leandro,%20estoy%20en%20el%20congreso%20y%20me%20interesa%20AgroAILab" 
+               target="_blank" 
+               class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs md:text-sm font-bold px-4 py-2 rounded-full flex items-center gap-2 transition-all shadow-lg shadow-emerald-900/20">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.411 0 11.981 0c3.184.001 6.177 1.242 8.426 3.496 2.249 2.254 3.484 5.252 3.481 8.441-.004 6.635-5.355 11.984-11.926 11.984-2.001-.001-3.971-.502-5.717-1.456L0 24zm6.59-4.846c1.6.95 3.488 1.449 5.38 1.451 5.485 0 9.947-4.46 9.951-9.94.002-2.654-1.02-5.149-2.877-7.01C17.185 1.795 14.7 1.77 12.001 1.77c-5.49 0-9.953 4.461-9.957 9.941-.002 1.933.504 3.82 1.465 5.474l-.973 3.55 3.642-.955zm11.392-7.51c-.301-.15-1.78-.878-2.056-.978-.275-.1-.476-.15-.676.15-.2.3-.777.978-.952 1.178-.176.2-.351.226-.652.075-3.003-1.503-4.389-2.583-5.597-4.664-.301-.515.301-.478.861-1.595.093-.188.047-.353-.023-.503-.071-.15-.676-1.63-.926-2.235-.244-.587-.491-.507-.676-.517-.175-.01-.376-.01-.577-.01s-.527.075-.802.375c-.276.3-1.053 1.027-1.053 2.504 0 1.478 1.078 2.903 1.228 3.103.15.2 2.122 3.241 5.143 4.545.718.311 1.279.497 1.717.636.722.23 1.377.197 1.897.121.579-.085 1.78-.727 2.031-1.43.25-.702.25-1.303.175-1.43-.075-.127-.276-.201-.576-.352z"/></svg>
+                <span>WhatsApp Directo</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="max-w-5xl mx-auto px-4 py-16 md:py-24 text-center">
+        <span class="text-brand-accent font-bold text-xs md:text-sm tracking-widest uppercase border border-brand-accent/30 bg-brand-accent/10 px-3 py-1 rounded-full">
+            El Punto Óptimo de la Agricultura Urbana
+        </span>
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mt-6 mb-6 leading-tight max-w-4xl mx-auto">
+            La Red de Micro-Fábricas Agrícolas Autónomas <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">Impulsadas por IA</span>
+        </h1>
+        <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+            Superamos la insostenibilidad financiera de las macro-granjas verticales y la complejidad del cultivo doméstico. Producción local automatizada, donde se consume.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#contacto" class="bg-brand-accent hover:bg-brand-accentHover text-brand-dark font-bold px-8 py-4 rounded-xl transition-all shadow-xl shadow-brand-accent/20 text-center">
+                Invertir / Ser Partner
+            </a>
+            <a href="#modelo" class="border border-slate-700 hover:border-slate-500 text-slate-300 font-medium px-8 py-4 rounded-xl transition-all text-center">
+                Ver Modelo de Negocio
+            </a>
+        </div>
+    </section>
+
+    <!-- EL PROBLEMA / SOLUCIÓN -->
+    <section class="bg-slate-900/50 border-y border-slate-800/60 py-16">
+        <div class="max-w-5xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-2xl md:text-3xl font-bold tracking-tight mb-4">La disrupción es la <span class="text-brand-accent">Descentralización</span></h2>
+                <p class="text-slate-400 mb-4 leading-relaxed">
+                    Las macro-granjas verticales colapsan por costos de logística, distribución y escala. 
+                </p>
+                <p class="text-slate-400 leading-relaxed">
+                    <strong>AgroAILab</strong> instala terminales compactas (tamaño vending gigante) en puntos urbanos clave. El alimento se cultiva y se cosecha exactamente donde se va a consumir, eliminando intermediarios y desperdicios.
+                </p>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-brand-card/50 p-6 rounded-2xl border border-slate-800">
+                    <div class="text-3xl font-bold text-brand-accent mb-1">-95%</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Consumo de Agua</div>
+                </div>
+                <div class="bg-brand-card/50 p-6 rounded-2xl border border-slate-800">
+                    <div class="text-3xl font-bold text-brand-accent mb-1">100%</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Autónomo (Robótica)</div>
+                </div>
+                <div class="bg-brand-card/50 p-6 rounded-2xl border border-slate-800">
+                    <div class="text-3xl font-bold text-brand-accent mb-1">0%</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Pesticidas / Plagas</div>
+                </div>
+                <div class="bg-brand-card/50 p-6 rounded-2xl border border-slate-800">
+                    <div class="text-3xl font-bold text-brand-accent mb-1">IA</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Optimización Real</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECNOLOGÍA -->
+    <section class="max-w-5xl mx-auto px-4 py-16">
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-center mb-12">Tecnología de Vanguardia Sin Mano de Obra</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-brand-card p-8 rounded-2xl border border-slate-800/80">
+                <div class="text-brand-accent text-3xl mb-4">💧</div>
+                <h3 class="text-xl font-bold mb-2">Aeroponía de Alta Presión</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Sistema vertical libre de bandejas tradicionales. Máxima oxigenación radicular para un crecimiento ultra veloz con recursos mínimos.</p>
+            </div>
+            <div class="bg-brand-card p-8 rounded-2xl border border-slate-800/80">
+                <div class="text-brand-accent text-3xl mb-4">🤖</div>
+                <h3 class="text-xl font-bold mb-2">Robótica & Visión</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Brazos mecánicos automatizados gestionan desde la siembra celular hasta la cosecha limpia, guiados por cámaras de alta resolución.</p>
+            </div>
+            <div class="bg-brand-card p-8 rounded-2xl border border-slate-800/80">
+                <div class="text-brand-accent text-3xl mb-4">🧠</div>
+                <h3 class="text-xl font-bold mb-2">IA Predictiva</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Actúa como agrónomo digital. Modifica luz y nutrientes autónomamente, crea "verduras de diseño" y aprende en red de cada terminal.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCIA APP -->
+    <section class="bg-slate-900/30 border-t border-slate-800 py-16">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold tracking-tight mb-4">La Experiencia: Tu Huerta Online</h2>
+            <p class="text-slate-400 mb-10">A través de nuestra App, el usuario vive el modelo <strong>Farm as a Service (FaaS)</strong> sin las complicaciones de cuidar la planta.</p>
+            
+            <div class="grid sm:grid-cols-3 gap-6 text-left">
+                <div class="flex gap-4 items-start">
+                    <span class="bg-brand-accent/20 text-brand-accent font-bold px-3 py-1 rounded-lg">1</span>
+                    <div>
+                        <h4 class="font-bold mb-1">Adopta y Elige</h4>
+                        <p class="text-slate-400 text-xs">Selecciona el cultivo digital y los parámetros de sabor o nutrición personalizados.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <span class="bg-brand-accent/20 text-brand-accent font-bold px-3 py-1 rounded-lg">2</span>
+                    <div>
+                        <h4 class="font-bold mb-1">Cuidado Zero-Stress</h4>
+                        <p class="text-slate-400 text-xs">Vete de vacaciones. La IA y los brazos robóticos se encargan de todo el ciclo biológico.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <span class="bg-brand-accent/20 text-brand-accent font-bold px-3 py-1 rounded-lg">3</span>
+                    <div>
+                        <h4 class="font-bold mb-1">Cosecha On-Demand</h4>
+                        <p class="text-slate-400 text-xs">Recibe una notificación de maduración, acude a la terminal urbana y retira tu vegetal vivo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODELO DE NEGOCIO -->
+    <section id="modelo" class="max-w-5xl mx-auto px-4 py-16">
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-center mb-4">Modelo de Negocio Tridimensional</h2>
+        <p class="text-slate-400 text-center max-w-xl mx-auto mb-12 text-sm">Estructura financiera diversificada y altamente escalable en mercados urbanos.</p>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-gradient-to-b from-brand-card to-brand-dark p-6 rounded-2xl border border-slate-800">
+                <div class="text-xs font-bold text-brand-accent uppercase tracking-wider mb-2">01. B2C / Consumidor</div>
+                <h3 class="text-lg font-bold mb-3">Suscripción de Verduras</h3>
+                <p class="text-slate-400 text-xs leading-relaxed">Ingresos recurrentes mensuales por la reserva de espacios de cultivo y retiro periódico de alimentos frescos.</p>
+            </div>
+            <div class="bg-gradient-to-b from-brand-card to-brand-dark p-6 rounded-2xl border border-slate-800">
+                <div class="text-xs font-bold text-brand-accent uppercase tracking-wider mb-2">02. B2B / Comercial</div>
+                <h3 class="text-lg font-bold mb-3">Hardware + SaaS</h3>
+                <p class="text-slate-400 text-xs leading-relaxed">Venta, leasing o franquicia de terminales a supermercados, hoteles y restaurantes, sumado a un SaaS de mantenimiento autónomo.</p>
+            </div>
+            <div class="bg-gradient-to-b from-brand-card to-brand-dark p-6 rounded-2xl border border-slate-800">
+                <div class="text-xs font-bold text-brand-accent uppercase tracking-wider mb-2">03. B2B / Plataforma</div>
+                <h3 class="text-lg font-bold mb-3">PaaS & Marketplace</h3>
+                <p class="text-slate-400 text-xs leading-relaxed">Software abierto para que terceros conecten sus granjas a nuestra IA, monetización de datos biológicos y marketplace de productores locales.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOUNDER (BREVE) -->
+    <section class="bg-slate-900/50 border-t border-slate-800 py-16">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+            <h2 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Detrás del Proyecto</h2>
+            <h3 class="text-2xl font-bold mb-4">Leandro Quisbert</h3>
+            <p class="text-slate-400 text-sm max-w-xl mx-auto leading-relaxed">
+                Emprendedor serial con sólida formación en finanzas y electrónica industrial (**Uniobi**). En 2018 fundó y vendió con éxito una startup Fintech. Posteriormente fundó una firma de maquinaria industrial, diseñando y entregando **más de 50 equipos CNC pesados a medida** para empresas en toda Argentina. 
+            </p>
+            <div class="mt-4 text-brand-accent text-xs font-semibold tracking-wider">
+                Viabilidad financiera + Ingeniería de hardware de precisión.
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO Y WHATSAPP -->
+    <section id="contacto" class="max-w-3xl mx-auto px-4 py-20 text-center">
+        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">¿Hablamos Hoy en el Congreso?</h2>
+        <p class="text-slate-400 max-w-md mx-auto mb-8 text-sm md:text-base">
+            Buscamos partners estratégicos e inversores para acelerar el despliegue de la red agrícola del futuro.
+        </p>
+
+        <!-- CAJA DE CONTACTO DIRECTO -->
+        <div class="bg-brand-card p-8 rounded-3xl border border-slate-700/60 shadow-2xl shadow-emerald-950/20 max-w-md mx-auto">
+            <div class="text-slate-400 text-xs uppercase tracking-wider font-bold mb-2">Contacto Directo con el Fundador</div>
+            
+            <!-- TELÉFONO -->
+            <div class="text-xl md:text-2xl font-mono font-bold text-white mb-6">
+                [ +54 9 11 XXXX-XXXX ]
+            </div>
+
+            <!-- BOTÓN WHATSAPP GRANDE -->
+            <a href="https://wa.me/+34611251053?text=Hola%20Leandro,%20estoy%20en%20el%20congreso%20y%20me%20interesa%20AgroAILab" 
+               target="_blank" 
+               class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-3 transition-all text-base shadow-lg shadow-emerald-900/30">
+                <!-- SVG Icono WhatsApp -->
+                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.411 0 11.981 0c3.184.001 6.177 1.242 8.426 3.496 2.249 2.254 3.484 5.252 3.481 8.441-.004 6.635-5.355 11.984-11.926 11.984-2.001-.001-3.971-.502-5.717-1.456L0 24zm6.59-4.846c1.6.95 3.488 1.449 5.38 1.451 5.485 0 9.947-4.46 9.951-9.94.002-2.654-1.02-5.149-2.877-7.01C17.185 1.795 14.7 1.77 12.001 1.77c-5.49 0-9.953 4.461-9.957 9.941-.002 1.933.504 3.82 1.465 5.474l-.973 3.55 3.642-.955zm11.392-7.51c-.301-.15-1.78-.878-2.056-.978-.275-.1-.476-.15-.676.15-.2.3-.777.978-.952 1.178-.176.2-.351.226-.652.075-3.003-1.503-4.389-2.583-5.597-4.664-.301-.515.301-.478.861-1.595.093-.188.047-.353-.023-.503-.071-.15-.676-1.63-.926-2.235-.244-.587-.491-.507-.676-.517-.175-.01-.376-.01-.577-.01s-.527.075-.802.375c-.276.3-1.053 1.027-1.053 2.504 0 1.478 1.078 2.903 1.228 3.103.15.2 2.122 3.241 5.143 4.545.718.311 1.279.497 1.717.636.722.23 1.377.197 1.897.121.579-.085 1.78-.727 2.031-1.43.25-.702.25-1.303.175-1.43-.075-.127-.276-.201-.576-.352z"/></svg>
+                <span>Chatear por WhatsApp</span>
+            </a>
+            <div class="text-[10px] text-slate-500 mt-3">Link directo: Abre chat de inmediato con plantilla de mensaje.</div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-900 bg-brand-dark py-8 text-center text-xs text-slate-600">
+        <p>&copy; 2026 AgroAILab. Todos los derechos reservados. Desarrollado para impacto global.</p>
+    </footer>
+
+</body>
+                  </html>
+                  

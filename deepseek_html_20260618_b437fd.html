@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroAILab | Tu huerta virtual real. Diseñá, cultivá, disfrutá.</title>
+    <meta name="description" content="Adoptá un espacio de cultivo en la nube. AgroAILab cultiva por vos con IA. Retirá vegetales vivos y personalizados en tu barrio. Suscripción fija, sin límites.">
+    <meta name="theme-color" content="#0b1329">
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep': '#0b1329',
+                        'navy': '#1c2541',
+                        'emerald': '#10b981',
+                        'emerald-glow': '#34d399',
+                        'surface': '#111c35',
+                        'border-subtle': '#243056',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+        body { background-color: #0b1329; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+        .glass { background: rgba(28, 37, 65, 0.55); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(36, 48, 86, 0.5); }
+        .glass-solid { background: rgba(17, 28, 53, 0.85); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(36, 48, 86, 0.65); }
+        .border-glow { position: relative; }
+        .border-glow::before {
+            content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+            background: linear-gradient(135deg, rgba(16,185,129,0.45), transparent 40%, transparent 60%, rgba(16,185,129,0.2));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; z-index: 0;
+        }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-3px); border-color: rgba(16,185,129,0.45); box-shadow: 0 18px 40px rgba(16,185,129,0.06); }
+        .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(16,185,129,0.3), transparent); border: none; }
+        .whatsapp-float {
+            position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50; display: flex; align-items: center; gap: 0.45rem;
+            background: #25D366; color: white; font-weight: 600; padding: 0.7rem 1.2rem; border-radius: 9999px;
+            box-shadow: 0 8px 32px rgba(37,211,102,0.4); transition: all 0.3s ease;
+            animation: glow 2s ease-in-out infinite alternate; text-decoration: none; font-size: 0.85rem;
+        }
+        .whatsapp-float:hover { transform: scale(1.06); background: #1fbd54; box-shadow: 0 14px 44px rgba(37,211,102,0.55); }
+        .pulse-ring { position: absolute; inset: -5px; border-radius: 9999px; border: 2px solid rgba(37,211,102,0.45); animation: pulseRing 2s ease-out infinite; pointer-events: none; }
+        @keyframes pulseRing { 0% { transform: scale(1); opacity: 0.65; } 100% { transform: scale(1.22); opacity: 0; } }
+        @keyframes glow { 0% { box-shadow: 0 0 18px rgba(16,185,129,0.2); } 100% { box-shadow: 0 0 40px rgba(16,185,129,0.5); } }
+        #mobile-menu-toggle { display: none; }
+        #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease; opacity: 0; }
+        #mobile-menu-toggle:checked~#mobile-menu { max-height: 26rem; opacity: 1; }
+        .tag { display: inline-block; padding: 0.2rem 0.7rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+        ::selection { background: rgba(16,185,129,0.35); color: #fff; }
+        @media (max-width: 640px) { .whatsapp-float { bottom: 1rem; right: 1rem; padding: 0.6rem 0.9rem; font-size: 0.75rem; } }
+    </style>
+</head>
+<body class="text-slate-200 antialiased">
+
+    <!-- ========== NAVBAR ========== -->
+    <header class="sticky top-0 z-40 bg-deep/80 backdrop-blur-xl border-b border-border-subtle/50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14 sm:h-16">
+            <a href="#hero" class="flex items-center gap-2 group shrink-0">
+                <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-emerald/15 border border-emerald/30 flex items-center justify-center group-hover:bg-emerald/20 transition-colors">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <span class="text-white font-bold text-base sm:text-lg tracking-tight">Agro<span class="text-emerald">AI</span>Lab</span>
+            </a>
+            <div class="hidden md:flex items-center gap-6 text-xs sm:text-sm font-medium">
+                <a href="#como-funciona" class="text-slate-300 hover:text-emerald">Experiencia</a>
+                <a href="#tecnologia" class="text-slate-300 hover:text-emerald">Tecnología</a>
+                <a href="#modelo" class="text-slate-300 hover:text-emerald">Suscripción</a>
+                <a href="#equipo" class="text-slate-300 hover:text-emerald">Equipo</a>
+                <a href="#contacto" class="px-4 py-1.5 bg-emerald text-deep font-semibold rounded-full text-xs hover:bg-emerald-glow transition-all shadow-lg shadow-emerald/20">Hablamos</a>
+            </div>
+            <label for="mobile-menu-toggle" class="md:hidden cursor-pointer p-2 text-slate-300 hover:text-white select-none" aria-label="Menú">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </label>
+        </div>
+        <input type="checkbox" id="mobile-menu-toggle">
+        <div id="mobile-menu" class="md:hidden bg-surface/95 backdrop-blur-xl border-b border-border-subtle/50">
+            <div class="px-4 py-3 flex flex-col gap-2 text-sm font-medium">
+                <a href="#como-funciona" class="py-2.5 px-3 rounded-lg text-slate-300 hover:text-emerald hover:bg-navy/60" onclick="document.getElementById('mobile-menu-toggle').checked=false">📱 Experiencia</a>
+                <a href="#tecnologia" class="py-2.5 px-3 rounded-lg text-slate-300 hover:text-emerald hover:bg-navy/60" onclick="document.getElementById('mobile-menu-toggle').checked=false">⚙️ Tecnología</a>
+                <a href="#modelo" class="py-2.5 px-3 rounded-lg text-slate-300 hover:text-emerald hover:bg-navy/60" onclick="document.getElementById('mobile-menu-toggle').checked=false">💳 Suscripción</a>
+                <a href="#equipo" class="py-2.5 px-3 rounded-lg text-slate-300 hover:text-emerald hover:bg-navy/60" onclick="document.getElementById('mobile-menu-toggle').checked=false">👥 Equipo</a>
+                <a href="#contacto" class="py-2.5 px-3 rounded-full bg-emerald text-deep font-semibold text-center" onclick="document.getElementById('mobile-menu-toggle').checked=false">💬 WhatsApp</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== HERO ========== -->
+    <section id="hero" class="relative overflow-hidden pt-14 pb-16 sm:pt-20 sm:pb-24 lg:pt-24 lg:pb-32" style="background-image: linear-gradient(to right, rgba(11,19,41,0.94) 0%, rgba(11,19,41,0.65) 40%, rgba(11,19,41,0.32) 100%), url('Foto.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="max-w-xl lg:max-w-2xl">
+                <div class="inline-flex items-center gap-2 mb-5 px-3 py-1 rounded-full bg-emerald/10 border border-emerald/20 text-emerald text-xs font-semibold tracking-wide">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald animate-pulse"></span>
+                    TU HUERTA EN LA CIUDAD, SIN TIERRA, SIN TRABAJO
+                </div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.06] tracking-tight mb-4">
+                    Adoptá un espacio de cultivo en la nube. <span class="text-emerald">AgroAILab hace el resto.</span>
+                </h1>
+                <p class="text-base sm:text-lg text-slate-300 max-w-lg mb-3 leading-relaxed">
+                    <strong class="text-white">Huerta Virtual Real:</strong> diseñá el sabor, los nutrientes y el tipo de verdura que querés. La inteligencia artificial lo cultiva de forma autónoma en una micro-fábrica de tu barrio. Sin trabajo, sin tierra, sin excusas.
+                </p>
+                <p class="text-sm sm:text-base text-slate-400 max-w-lg mb-7 leading-relaxed">
+                    <span class="text-emerald font-semibold">Cosechá solo lo que necesitás, cuando lo necesitás.</span> Podés cortar hojas frescas dejando la planta viva para la próxima. La app te notifica el momento exacto de máxima frescura y valor nutricional.
+                </p>
+                <div class="flex flex-col sm:flex-row items-start gap-3 mb-10">
+                    <a href="#contacto" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 bg-emerald text-deep font-bold rounded-full text-sm hover:bg-emerald-glow transition-all shadow-2xl shadow-emerald/25 animate-glow">
+                        Quiero mi huerta virtual
+                    </a>
+                    <a href="#como-funciona" class="text-slate-400 hover:text-emerald text-sm font-medium transition-colors flex items-center gap-1">Ver cómo funciona →</a>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <span class="tag bg-emerald/10 text-emerald border border-emerald/20">🎛️ Diseñás tus vegetales</span>
+                    <span class="tag bg-emerald/10 text-emerald border border-emerald/20">🤖 IA cultiva por vos</span>
+                    <span class="tag bg-emerald/10 text-emerald border border-emerald/20">✂️ Cosecha parcial</span>
+                    <span class="tag bg-emerald/10 text-emerald border border-emerald/20">📍 Retirás en tu barrio</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider max-w-3xl mx-auto">
+
+    <!-- ========== CÓMO FUNCIONA ========== -->
+    <section id="como-funciona" class="py-14 sm:py-18">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-10">
+                <span class="tag bg-emerald/10 text-emerald border border-emerald/20 mb-3">HUERTA VIRTUAL REAL</span>
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-[1.1]">
+                    Comer más verde nunca fue tan fácil (ni tan inteligente)
+                </h2>
+                <p class="text-slate-400 text-sm max-w-xl mx-auto mt-2">Tres pasos. Cero esfuerzo. Verduras hiperpersonalizadas criadas por inteligencia artificial que aprende de cada hoja.</p>
+            </div>
+            <div class="grid sm:grid-cols-3 gap-5 lg:gap-7 max-w-4xl mx-auto">
+                <div class="glass rounded-xl p-5 sm:p-6 text-center card-hover border-glow">
+                    <div class="text-3xl mb-3">🎨</div>
+                    <h3 class="text-lg font-bold text-white mb-2">1. Diseñás</h3>
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                        Desde la app, <strong class="text-slate-200">elegís qué cultivar y cómo.</strong> Ajustás el nivel de dulzor, la textura, el aporte nutricional. Creás tu propia receta o usás una de la comunidad. <span class="text-emerald font-semibold">Verduras de diseño.</span>
+                    </p>
+                </div>
+                <div class="glass rounded-xl p-5 sm:p-6 text-center card-hover border-glow">
+                    <div class="text-3xl mb-3">🤖</div>
+                    <h3 class="text-lg font-bold text-white mb-2">2. La IA cultiva</h3>
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                        Una vez que confirmás, <strong class="text-slate-200">el sistema toma el control.</strong> Brazos robóticos siembran, la aeroponía nutre y la inteligencia artificial monitorea cada hoja. Vos podés olvidarte por completo. Funciona 24/7.
+                    </p>
+                </div>
+                <div class="glass rounded-xl p-5 sm:p-6 text-center card-hover border-glow">
+                    <div class="text-3xl mb-3">✂️</div>
+                    <h3 class="text-lg font-bold text-white mb-2">3. Cosechá a demanda</h3>
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                        La app te avisa cuando las hojas están en su punto justo. <strong class="text-slate-200">Cortás solo lo que vas a consumir</strong> y la planta sigue viva, produciendo más. Frescura absoluta, cero desperdicio, ciclo continuo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider max-w-3xl mx-auto">
+
+    <!-- ========== TECNOLOGÍA + LABORATORIO DE DATOS ========== -->
+    <section id="tecnologia" class="py-14 sm:py-18">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-10">
+                <span class="tag bg-emerald/10 text-emerald border border-emerald/20 mb-3">EL MOTOR INVISIBLE</span>
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-[1.1]">
+                    Cada cultivo es un <span class="text-emerald">experimento que enseña</span> a toda la red
+                </h2>
+                <p class="text-slate-400 text-sm max-w-xl mx-auto mt-2">AgroAILab es un laboratorio distribuido. Millones de datos generados por cada micro-fábrica entrenan una IA que aprende a cultivar cada vez mejor. Esos datos son el activo más valioso del ecosistema.</p>
+            </div>
+            <div class="grid sm:grid-cols-3 gap-5 lg:gap-7">
+                <div class="glass rounded-2xl p-5 sm:p-6 card-hover border-glow relative group">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-emerald/5 rounded-bl-3xl -z-0 group-hover:bg-emerald/8 transition-colors"></div>
+                    <div class="w-11 h-11 rounded-xl bg-emerald/10 border border-emerald/20 flex items-center justify-center mb-4 text-2xl">🧠</div>
+                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">IA + Visión Artificial</h3>
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                        Cámaras 4K analizan cada hoja en tiempo real. La IA <strong class="text-white">ajusta niebla, luz y nutrientes</strong> para lograr el perfil exacto que diseñaste. <span class="text-emerald font-semibold">Cada cultivo genera datos que refinan los algoritmos para todos.</span>
+                    </p>
+                </div>
+                <div class="glass rounded-2xl p-5 sm:p-6 card-hover border-glow relative group">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-emerald/5 rounded-bl-3xl -z-0 group-hover:bg-emerald/8 transition-colors"></div>
+                    <div class="w-11 h-11 rounded-xl bg-emerald/10 border border-emerald/20 flex items-center justify-center mb-4 text-2xl">💧</div>
+                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Aeroponía de Alta Presión</h3>
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                        Raíces suspendidas en niebla nutritiva. <strong class="text-white">95% menos agua</strong> que el cultivo tradicional. Sin tierra, sin bandejas, sin plagas. Crecimiento un 30% más rápido que en hidroponía convencional.
+                    </p>
+                </div>
+                <div class="glass rounded-2xl p-5 sm:p-6 card-hover border-glow relative group">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-emerald/5 rounded-bl-3xl -z-0 group-hover:bg-emerald/8 transition-colors"></div>
+                    <div class="w-11 h-11 rounded-xl bg-emerald/10 border border-emerald/20 flex items-center justify-center mb-4 text-2xl">🦾</div>
+                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Robótica Autónoma</h3>
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                        Brazos mecánicos que <strong class="text-white">ejecutan todo el ciclo sin intervención humana:</strong> siembra, cuidado y cosecha parcial programada. Operan 24/7 con precisión milimétrica. Cero errores, cero fatiga.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider max-w-3xl mx-auto">
+
+    <!-- ========== MODELO DE SUSCRIPCIÓN + MARKETPLACE ========== -->
+    <section id="modelo" class="py-14 sm:py-18">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div>
+                    <span class="tag bg-emerald/10 text-emerald border border-emerald/20 mb-3">SUSCRIPCIÓN + MARKETPLACE</span>
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-[1.12] mb-4">
+                        Una cuota fija. <span class="text-emerald">Cosechas ilimitadas.</span> Y un mercado abierto.
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-4">
+                        Pagás una suscripción mensual plana y accedés a tu huerta virtual sin límites. <strong class="text-white">Cultivá todo lo que quieras, cuando quieras.</strong> Podés pausar, retomar o cancelar en cualquier momento. Es tu espacio, tus reglas.
+                    </p>
+                    <p class="text-slate-400 text-sm leading-relaxed border-l-2 border-emerald/40 pl-4 mb-4">
+                        <strong class="text-emerald font-semibold">Además, la plataforma es un marketplace.</strong> Si no querés cultivar, podés comprar vegetales frescos de otros productores locales que usan nuestra infraestructura. O vender tus propios cultivos a la comunidad. La red AgroAILab conecta oferta y demanda a kilómetro cero.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag bg-emerald/10 text-emerald border border-emerald/20">💳 Cuota fija</span>
+                        <span class="tag bg-emerald/10 text-emerald border border-emerald/20">♾️ Sin límites</span>
+                        <span class="tag bg-emerald/10 text-emerald border border-emerald/20">🛒 Marketplace</span>
+                    </div>
+                </div>
+                <div class="glass-solid rounded-2xl p-5 sm:p-7 border-glow text-center">
+                    <p class="text-slate-200 text-sm sm:text-base leading-relaxed italic mb-4">
+                        "La mayoría no come suficientes vegetales porque es caro, incómodo o no sabe cocinarlos. Nosotros borramos esas barreras con tecnología, datos y una suscripción justa."
+                    </p>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="bg-emerald/5 rounded-lg p-3">
+                            <span class="text-emerald text-xl font-extrabold">1</span>
+                            <p class="text-slate-400 text-[0.6rem]">cuota fija</p>
+                        </div>
+                        <div class="bg-emerald/5 rounded-lg p-3">
+                            <span class="text-emerald text-xl font-extrabold">∞</span>
+                            <p class="text-slate-400 text-[0.6rem]">cosechas</p>
+                        </div>
+                        <div class="bg-emerald/5 rounded-lg p-3">
+                            <span class="text-emerald text-xl font-extrabold">0</span>
+                            <p class="text-slate-400 text-[0.6rem]">esfuerzo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider max-w-3xl mx-auto">
+
+    <!-- ========== EQUIPO ========== -->
+    <section id="equipo" class="py-14 sm:py-18">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-10">
+                <span class="tag bg-emerald/10 text-emerald border border-emerald/20 mb-3">EQUIPO</span>
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-[1.1]">
+                    Dos perfiles que se complementan a la perfección
+                </h2>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-5 lg:gap-7">
+                <div class="glass-solid rounded-2xl p-5 sm:p-7 border-glow flex flex-col items-center text-center card-hover">
+                    <div class="w-20 h-20 rounded-full bg-emerald/15 border-2 border-emerald/30 flex items-center justify-center mb-4">
+                        <span class="text-2xl font-extrabold text-emerald">LQ</span>
+                    </div>
+                    <span class="tag bg-emerald/10 text-emerald border border-emerald/20 mb-2">CEO</span>
+                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Leandro Quisbert</h3>
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                        Finanzas + Electrónica Industrial (UNIOVI). Vendió su startup Fintech en 2018. Fabricó <strong class="text-white">+50 equipos CNC industriales</strong> a medida para empresas argentinas. Sabe cómo hacer rentable una idea y cómo construir hardware de precisión.
+                    </p>
+                </div>
+                <div class="glass-solid rounded-2xl p-5 sm:p-7 border-glow flex flex-col items-center text-center card-hover">
+                    <div class="w-20 h-20 rounded-full bg-emerald/15 border-2 border-emerald/30 flex items-center justify-center mb-4">
+                        <span class="text-2xl font-extrabold text-emerald">CQ</span>
+                    </div>
+                    <span class="tag bg-emerald/10 text-emerald border border-emerald/20 mb-2">CTO</span>
+                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Christian Quisbert</h3>
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                        <strong class="text-white">+10 años liderando desarrollo</strong> en Fintechs y Agrotechs. Arquitecto del ecosistema digital y la plataforma de IA que aprende de cada cultivo. El cerebro que diseñó la huerta virtual que funciona de verdad.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider max-w-3xl mx-auto">
+
+    <!-- ========== CTA FINAL ========== -->
+    <section id="contacto" class="py-14 sm:py-18">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center">
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-[1.1] mb-3">
+                ¿Querés tu propia huerta virtual?
+            </h2>
+            <p class="text-slate-400 text-sm max-w-md mx-auto mb-7">
+                Escribinos por WhatsApp. Te contamos cómo funciona, resolvemos tus dudas y te damos acceso anticipado.
+            </p>
+            <a href="https://wa.me/34611251053?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20la%20huerta%20virtual%20de%20AgroAILab.%20%C2%BFPodemos%20conversar%3F"
+            target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-emerald text-deep font-bold rounded-full text-base hover:bg-emerald-glow transition-all shadow-2xl shadow-emerald/25 animate-glow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+            Hablar por WhatsApp
+        </a>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="border-t border-border-subtle/40 py-6">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+            <span class="text-white font-semibold">Agro<span class="text-emerald">AI</span>Lab <span class="text-slate-600 font-normal">© 2026</span></span>
+            <span>Comé más verde. Sin esfuerzo. Sin excusas.</span>
+        </div>
+    </footer>
+
+    <!-- ========== BOTÓN FLOTANTE ========== -->
+    <a href="https://wa.me/34611251053?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20la%20huerta%20virtual%20de%20AgroAILab.%20%C2%BFPodemos%20conversar%3F"
+    target="_blank" rel="noopener noreferrer"
+    class="whatsapp-float" aria-label="WhatsApp">
+    <span class="pulse-ring"></span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+    <span class="hidden sm:inline">WhatsApp</span>
+</a>
+
+</body>
+</html>
